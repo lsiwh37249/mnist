@@ -23,3 +23,6 @@ build-backend = "pdm.backend"
 
 [tool.pdm]
 distribution = true
+
+[project.scripts]
+ml-worker = 'mnist.worker:run'
