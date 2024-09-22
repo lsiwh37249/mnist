@@ -64,7 +64,12 @@ async def create_upload_file(file: UploadFile):
     file_name = file.filename
     print(file_name)
 
-    upload_dir = "/home/kim1/code/mnist/img" 
+    #upload_dir = "/home/kim1/code/mnist/img"
+    pwd = os.getcwd()
+
+    # 이미지 디렉토리 경로 설정
+    upload_dir = os.path.join(pwd, "img")
+
     # 디렉토리가 없으면 오류, 코드에서 확인 및 만들기 추가
     if not os.path.exists(upload_dir):
         os.mkdir(upload_dir)
