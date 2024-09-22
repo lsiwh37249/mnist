@@ -31,20 +31,25 @@ def send_line(messages):
 def run():
     # STEP 1
     # image_processing 테이블의 prediction_result IS NULL 인 ROW 1 개 조회 - num 갖여오기
-    num = one()
-    print(f"one: {num}")
+    try:
+        num = one()
+        print(f"one: {num}")
     
-    # STEP 2
-    # RANDOM 으로 0 ~ 9 중 하나 값을 prediction_result 컬럼에 업데이트
-    predict_result = random.randrange(0,10)
-    prediction_time = now_seoul()
-    prediction_model = "simple_random"
+        # STEP 2
+        # RANDOM 으로 0 ~ 9 중 하나 값을 prediction_result 컬럼에 업데이트
+        predict_result = random.randrange(0,10)
+        prediction_time = now_seoul()
+        prediction_model = "simple_random"
 
-    # 동시에 prediction_model, prediction_time 도 업데이트
-    predict_set = (predict_result, prediction_model,prediction_time, num)
-    result = update_result(*predict_set)
-    result_pr = result[0]['prediction_result']
-    print(result_pr)
-    # STEP 3
-    # LINE 으로 처리 결과 전송
-    send_line(result_pr)
+        # 동시에 prediction_model, prediction_time 도 업데이트
+        predict_set = (predict_result, prediction_model,prediction_time, num)
+        result = update_result(*predict_set)
+        result_pr = result[0]['prediction_result']
+        print(result_pr)
+        # STEP 3
+        # LINE 으로 처리 결과 전송
+    except:
+        result_pr = "처리할 이미지가 필요합니다."
+
+    finally:
+        send_line(result_pr)

@@ -17,9 +17,8 @@ def select(query: str, size = -1):
             try:
                 result = cursor.fetchmany(size)
                 return result
-            except pymysql.err.InternalError as e:
-                code, msg = e.args
-                result =[code, msg]
+            except Exception as e:
+                result = {"prediction_result" : "에측할 사진이 없습니다."}
                 return result
 
 #def dml(sql, file_name, file_full_path, formatted_time, request_user):    
