@@ -32,7 +32,7 @@ def run():
     # STEP 1
     # image_processing 테이블의 prediction_result IS NULL 인 ROW 1 개 조회 - num 갖여오기
     num = one()
-    #print(f"one: {num}")
+    print(f"one: {num}")
     
     # STEP 2
     # RANDOM 으로 0 ~ 9 중 하나 값을 prediction_result 컬럼에 업데이트
@@ -44,7 +44,7 @@ def run():
     predict_set = (predict_result, prediction_model,prediction_time, num)
     result = update_result(*predict_set)
     result_pr = result[0]['prediction_result']
-    #print(result_pr)
+    print(result_pr)
     # STEP 3
     # LINE 으로 처리 결과 전송
     send_line(result_pr)
