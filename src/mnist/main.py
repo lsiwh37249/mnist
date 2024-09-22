@@ -40,13 +40,6 @@ def select(query: str, size = -1):
 #     # your changes
 #     connection.commit()
 
-def send_LINE():
-    return True
-
-def image_processing():
-    return True
-
-
 @app.get("/one")
 def one():
     sql = """SELECT * FROM image_processing WHERE prediction_time IS NULL ORDER BY num LIMIT 1"""
@@ -99,22 +92,6 @@ async def create_upload_file(file: UploadFile):
     
     #이미지 경로로 이미지 받아오기 
     #select_db(file_full_path)
-
-    #모델 로드 
-    #with open(file_path) as f
-    #    model = f.read....
-    
-    #이미지 처리  
-    #result = image_processing(model)
-
-    #라인 연동
-
-    #라인에 보내기 
-
-    return 
-
-    #값을 리턴 + line에 보내기
-
 
 
     # 파일 저장 경로 DB INSERT
