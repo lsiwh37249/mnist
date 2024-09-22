@@ -25,7 +25,6 @@ def now_seoul():
 def send_line(messages):
     token = os.getenv('LINE_NOTI_TOKEN')
     headers = {'Authorization': f'Bearer {token}'}
-    print(headers)
     info = {'message': f'predict_result : {messages}'}
     response = requests.post('https://notify-api.line.me/api/notify', headers=headers, data = info)
 

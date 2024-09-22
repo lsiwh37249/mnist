@@ -1,4 +1,1 @@
-SHELL=/bin/bash
-PATH=/usr/local/sbin:/usr/local/bin/sbin:/bin:/usr/
-
 * * * * * /usr/local/bin/ml-worker >> /var/log/worker.log 2>&1
