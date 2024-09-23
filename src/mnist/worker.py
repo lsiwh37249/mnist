@@ -4,6 +4,10 @@ import requests
 from datetime import datetime
 import pytz
 import os
+import pdb
+
+# MySQL 연결 코드 중간에 디버깅 트리거
+pdb.set_trace()
 
 def one():
     sql = """SELECT * FROM image_processing WHERE prediction_result IS NULL ORDER BY num LIMIT 2"""
@@ -52,5 +56,6 @@ def run():
         result_pr = "처리할 이미지가 필요합니다."
 
     finally:
-        print({"result" : f"{result_pr}"})
+        datetime = now_seoul()
+        print({"now" :f"{datetime}"})
         send_line(result_pr)
