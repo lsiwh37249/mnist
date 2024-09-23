@@ -1,13 +1,14 @@
 import pymysql.cursors
 
 def get_conn():
-    con = pymysql.connect(host='172.18.0.1',
+    con = pymysql.connect(host=os.getenv('DB_IP', 'localhost')
                              user='mnist',
                              password='1234',
                              database='mnistdb',
                              port=53306,
                              cursorclass=pymysql.cursors.DictCursor)
     return con
+    
 
 def select(query: str, size = -1):
     conn = get_conn()
@@ -17,9 +18,8 @@ def select(query: str, size = -1):
             try:
                 result = cursor.fetchmany(size)
                 return result
-            except pymysql.err.InternalError as e:
-                code, msg = e.args
-                result =[code, msg]
+            except Exception as e:
+                result = {"prediction_result" : "에측할 사진이 없습니다."}
                 return result
 
 #def dml(sql, file_name, file_full_path, formatted_time, request_user):    
