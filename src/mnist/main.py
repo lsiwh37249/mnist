@@ -6,7 +6,7 @@ import pymysql.cursors
 app = FastAPI()
 
 def get_conn():
-    con = pymysql.connect(host='172.18.0.1',
+    con = pymysql.connect(host=os.getenv('DB_IP', 'localhost'),
                              user='mnist',
                              password='1234',
                              database='mnistdb',
@@ -62,7 +62,7 @@ async def create_upload_file(file: UploadFile):
     # 파일 저장
     img = await file.read()
     file_name = file.filename
-    print(file_name)
+    file_ext = file.content_type.split('/')[-1]
 
     #upload_dir = "/home/kim1/code/mnist/img"
     pwd = os.getcwd()
@@ -73,8 +73,9 @@ async def create_upload_file(file: UploadFile):
     # 디렉토리가 없으면 오류, 코드에서 확인 및 만들기 추가
     if not os.path.exists(upload_dir):
         os.mkdir(upload_dir)
-
-    file_full_path = os.path.join(upload_dir, file_name)
+    
+    import uuid
+    file_full_path = os.path.join(upload_dir, f'{uuid.uuid4()}.{file_ext}')
     
     with open(file_full_path, "wb") as f:
         f.write(img)
