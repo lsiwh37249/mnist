@@ -1,5 +1,5 @@
 import pymysql.cursors
-
+import os
 def get_conn():
     con = pymysql.connect(host=os.getenv('DB_IP', 'localhost'),
                              user='mnist',

@@ -1,6 +1,6 @@
 [project]
 name = "mnist"
-version = "0.3.4"
+version = "0.3.5"
 description = "Default template for PDM package"
 authors = [
     {name = "lsiwh37249", email = "lsiwh37249@gmail.com"},
