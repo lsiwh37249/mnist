@@ -4,10 +4,10 @@ import requests
 from datetime import datetime
 import pytz
 import os
-import pdb
+#import pdb
 
 # MySQL 연결 코드 중간에 디버깅 트리거
-pdb.set_trace()
+#pdb.set_trace()
 
 def one():
     sql = """SELECT * FROM image_processing WHERE prediction_result IS NULL ORDER BY num LIMIT 2"""
