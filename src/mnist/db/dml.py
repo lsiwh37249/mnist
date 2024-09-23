@@ -7,7 +7,6 @@ def get_conn():
                              database='mnistdb',
                              port=53306,
                              cursorclass=pymysql.cursors.DictCursor)
-    print(f"{DB_IP}")
     return con
     
 
