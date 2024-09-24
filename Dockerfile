@@ -9,7 +9,9 @@ RUN crontab /etc/cron.d/ml-work-cronjob
 
 COPY src/mnist/main.py /code/
 COPY run.sh /code/run.sh
+COPY mnist240924.keras /code/
+COPY src/mnist/model.py /code/
 
-RUN pip install --no-cache-dir --upgrade git+https://github.com/lsiwh37249/mnist.git@0.4.1
+RUN pip install --no-cache-dir --upgrade git+https://github.com/lsiwh37249/mnist.git@0.4.2
 
 CMD ["sh", "run.sh"]

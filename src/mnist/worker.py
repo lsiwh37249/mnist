@@ -41,6 +41,7 @@ def run():
     
         # STEP 2
         # RANDOM 으로 0 ~ 9 중 하나 값을 prediction_result 컬럼에 업데이트
+        #image_path = "/home/kim1/code/mnist/img/2eba341a-d3dd-47dd-8fba-b446158bfa79.png"
         predict_result = predict_digit(image_path)
         print(f"predict_result : {predict_result}")
         prediction_time = now_seoul()
