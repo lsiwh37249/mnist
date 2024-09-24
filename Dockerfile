@@ -12,6 +12,6 @@ COPY run.sh /code/run.sh
 COPY mnist240924.keras /code/
 COPY src/mnist/model.py /code/
 
-RUN pip install --no-cache-dir --upgrade git+https://github.com/lsiwh37249/mnist.git@0.4.3
+RUN pip install --no-cache-dir --upgrade git+https://github.com/lsiwh37249/mnist.git@0.4.4
 
 CMD ["sh", "run.sh"]
