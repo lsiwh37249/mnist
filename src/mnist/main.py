@@ -2,6 +2,7 @@ from typing import Annotated
 from fastapi import FastAPI, File, UploadFile
 import os
 import pymysql.cursors
+from mnist.db.dml import dml
 
 app = FastAPI()
 
@@ -64,41 +65,23 @@ async def create_upload_file(file: UploadFile):
     file_name = file.filename
     file_ext = file.content_type.split('/')[-1]
 
-    #upload_dir = "/home/kim1/code/mnist/img"
-    pwd = os.getcwd()
-
-    # 이미지 디렉토리 경로 설정
-    upload_dir = os.path.join(pwd, "img")
-
     # 디렉토리가 없으면 오류, 코드에서 확인 및 만들기 추가
+    upload_dir = os.getenv('UPLOAD_DIR','/home/diginori/code/mnist/img')
     if not os.path.exists(upload_dir):
-        os.mkdir(upload_dir)
+        os.makedirs(upload_dir)
     
     import uuid
     file_full_path = os.path.join(upload_dir, f'{uuid.uuid4()}.{file_ext}')
-    
+    print(file_full_path)
+
     with open(file_full_path, "wb") as f:
         f.write(img)
-    
-    # 시간
-    
-    from datetime import datetime
-    import pytz
 
-    time = datetime.now(pytz.timezone('Asia/Seoul'))
-    formatted_time = time.strftime("%Y-%m-%d %H:%M:%S")
-    
-    con = get_conn()
+    formatted_time = time_seoul()
 
-    sql = "INSERT INTO `image_processing` (`file_name`, `file_path`,`request_time`,`request_user`) VALUES (%s, %s, %s, %s)"
-    
-    from mnist.db.dml import dml
-    #values = [file_name, file_full_path, formatted_time, "n22"] 
+    sql = "INSERT INTO `image_processing` (`file_name`, `file_path`,`request_time`,`request_user`) VALUES (%s, %s, %s, %s)"    
     insert_row = dml(sql, file_name, file_full_path, formatted_time, "n22")
     
-    #이미지 경로로 이미지 받아오기 
-    #select_db(file_full_path)
-
 
     # 파일 저장 경로 DB INSERT
     # tablename : image_processing
