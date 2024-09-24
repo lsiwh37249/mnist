@@ -4,6 +4,7 @@ import requests
 from datetime import datetime
 import pytz
 import os
+from mnist.model import preprocess_image,predict_digit
 #import pdb
 
 # MySQL 연결 코드 중간에 디버깅 트리거
@@ -41,9 +42,10 @@ def run():
     
         # STEP 2
         # RANDOM 으로 0 ~ 9 중 하나 값을 prediction_result 컬럼에 업데이트
-        predict_result = random.randrange(0,10)
+        image_path = "/home/kim1/code/mnist/note/example_2.png"
+        predict_result = predict_digit(image_path)
         prediction_time = now_seoul()
-        prediction_model = "simple_random"
+        prediction_model = "n22"
 
         # 동시에 prediction_model, prediction_time 도 업데이트
         predict_set = (predict_result, prediction_model,prediction_time, num)

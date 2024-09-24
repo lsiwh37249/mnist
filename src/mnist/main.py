@@ -32,15 +32,6 @@ def select(query: str, size = -1):
 
     return result
 
-# def insert_row(connection, sql, file_name, file_full_path, formatted_time, request_user):
-#     with connection.cursor() as cursor:
-#         # Create a new record
-#         cursor.execute(sql, (file_name, file_full_path, formatted_time, request_user))
-
-#     # connection is not autocommit by default. So you must commit to save
-#     # your changes
-#     connection.commit()
-
 @app.get("/one")
 def one():
     sql = """SELECT * FROM image_processing WHERE prediction_time IS NULL ORDER BY num LIMIT 1"""
