@@ -30,7 +30,7 @@ def now_seoul():
 def send_line(messages):
     token = os.getenv('LINE_NOTI_TOKEN')
     headers = {'Authorization': f'Bearer {token}'}
-    info = {'message': f'predict_result : {messages}'}
+    info = {'message': f'predict_result : {messages[0]}, label : {messages[1]}'}
     response = requests.post('https://notify-api.line.me/api/notify', headers=headers, data = info)
 
 def run():
@@ -53,7 +53,7 @@ def run():
     # 동시에 prediction_model, prediction_time 도 업데이트
     predict_set = (predict_result, prediction_model,prediction_time, num)
     result = update_result(*predict_set)
-    result_pr = result[0]['prediction_result']
+    result_pr = (result[0]['prediction_result'], result[0]['label'])
     # STEP 3
     # LINE 으로 처리 결과 전송
     datetime = now_seoul()

@@ -55,6 +55,8 @@ async def create_upload_file(file: UploadFile):
     img = await file.read()
     file_name = file.filename
     file_ext = file.content_type.split('/')[-1]
+    label = file.filename.split("_")[0]
+    print(label)
 
     # 디렉토리가 없으면 오류, 코드에서 확인 및 만들기 추가
     upload_dir = os.getenv('UPLOAD_DIR','/home/kim1/code/mnist/img')
@@ -70,8 +72,8 @@ async def create_upload_file(file: UploadFile):
 
     formatted_time = time_seoul()
 
-    sql = "INSERT INTO `image_processing` (`file_name`, `file_path`,`request_time`,`request_user`) VALUES (%s, %s, %s, %s)"    
-    insert_row = dml(sql, file_name, file_full_path, formatted_time, "n22")
+    sql = "INSERT INTO `image_processing` (`file_name`, `file_path`,`request_time`,`request_user`,`label`) VALUES (%s, %s, %s, %s, %s)"    
+    insert_row = dml(sql, file_name, file_full_path, formatted_time, "n22", label)
     
 
     # 파일 저장 경로 DB INSERT

@@ -23,11 +23,11 @@ def select(query: str, size = -1):
                 return result
 
 #def dml(sql, file_name, file_full_path, formatted_time, request_user):    
-def dml(sql, file_name, file_full_path, formatted_time, request_user):
+def dml(sql, file_name, file_full_path, formatted_time, request_user, label):
     connection = get_conn()
     with connection.cursor() as cursor:
         # Create a new record
-        cursor.execute(sql, (file_name, file_full_path, formatted_time, request_user))
+        cursor.execute(sql, (file_name, file_full_path, formatted_time, request_user, label))
         # connection is not autocommit by default. So you must commit to save
         # your changes
         connection.commit()
