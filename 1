@@ -1,18 +1,10 @@
-import os
 import numpy as np
 from PIL import Image
 from keras.models import load_model
 
-def get_file_path():
-    f= __file__
-    # 절대 경로를 이용해 model.pkl의 경로를 조합
-    dir_name=os.path.dirname(f)
-    file_path=os.path.join(dir_name, "mnist240924.keras")
-    return file_path
 # 모델 로드
 #model = load_model('./mnist240924.keras') 
-file_path = get_file_path()
-model = load_model(file_path) 
+model = load_model('/code/mnist240924.keras') 
 
 # 학습된 모델 파일 경로# 사용자 이미지 불러오기 및 전처리
 def preprocess_image(image_path):
