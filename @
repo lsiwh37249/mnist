@@ -2,9 +2,18 @@ from typing import Annotated
 from fastapi import FastAPI, File, UploadFile
 import os
 import pymysql.cursors
-from mnist.db.dml import dml, select
+from mnist.db.dml import dml
 
 app = FastAPI()
+
+#def get_conn():
+#    con = pymysql.connect(host=os.getenv('DB_IP', 'localhost'),
+#                             user='mnist',
+#                             password='1234',
+#                             database='mnistdb',
+#                             port=53306,
+#                             cursorclass=pymysql.cursors.DictCursor)
+#    return con
 
 def time_seoul():
     from datetime import datetime
@@ -13,6 +22,14 @@ def time_seoul():
     time = datetime.now(pytz.timezone('Asia/Seoul'))
     formatted_time = time.strftime("%Y-%m-%d %H:%M:%S")
     return formatted_time
+
+#def select(query: str, size = -1):
+#    conn = get_conn()
+#    with conn:
+#        with conn.cursor() as cursor:
+#            cursor.execute(query)
+#            result = cursor.fetchmany(size)
+#    return result
 
 @app.get("/one")
 def one():
@@ -38,9 +55,9 @@ async def create_upload_file(file: UploadFile):
     file_name = file.filename
     file_ext = file.content_type.split('/')[-1]
     label = file.filename.split("_")[0]
-    #print(label)
+    print(label)
 
-    # 디렉토리가없으면 오류, 코드에서 확인 및 만들기 추가
+    # 디렉토리가 없으면 오류, 코드에서 확인 및 만들기 추가
     upload_dir = os.getenv('UPLOAD_DIR','/home/kim1/code/mnist/img')
     if not os.path.exists(upload_dir):
         os.makedirs(upload_dir)
