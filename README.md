@@ -2,6 +2,8 @@
 
 ### RUN
 ```bash
+$ git clone
+$ pip install .
 $ uvicorn src.mnist.main:app --reload
 ```
 
